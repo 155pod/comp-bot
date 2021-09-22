@@ -38,7 +38,17 @@ class Bandcamp:
             return []
 
     def __album_track_links(self, album_link):
-        return re.findall(self.TRACK_LINK_RE, self.__webpage_html(album_link))
+        track_list = []
+        all_track_links = re.findall(
+            self.TRACK_LINK_RE,
+            self.__webpage_html(album_link)
+        )
+
+        for track_link in all_track_links:
+            if not track_link in track_list:
+                track_list.append(track_link)
+
+        return track_list
 
     def __is_bandcamp_link(self):
         if "https://" in self.url and ("bandcamp.com" in self.url):
