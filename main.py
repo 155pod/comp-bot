@@ -11,6 +11,7 @@ from async_timeout import timeout
 from discord.ext import commands
 
 from bandcamp import Bandcamp
+import responses
 
 my_secret = os.environ['TOKEN']
 
@@ -452,7 +453,7 @@ class Music(commands.Cog):
             if "bandcamp.com/album" in search:
                 await ctx.send("Hold up. Currently enqueuing album...")
                 await self.__enqueue_bandcamp_album(ctx, search)
-                await ctx.send("Siick. The album is enqueued now.")
+                await ctx.send("%s The album is enqueued now." % responses.get_enqueue_response())
             else:
                 await self.__enqueue_single_track(ctx, search, True)
 
