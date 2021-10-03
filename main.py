@@ -4,6 +4,7 @@ import itertools
 import math
 import random
 import os
+import time
 
 import discord
 import youtube_dl
@@ -452,13 +453,15 @@ class Music(commands.Cog):
         async with ctx.typing():
             if "bandcamp.com/album" in search:
                 await ctx.send("Hold up. Currently enqueuing album...")
+                s = time.time()
                 await self.__enqueue_bandcamp_album(ctx, search)
+                print("enqueue time:", time.time() - s)
                 await ctx.send("%s The album is enqueued now." % responses.get_enqueue_response())
             else:
                 await self.__enqueue_single_track(ctx, search, True)
 
     async def __find_source(self, ctx: commands.Context, track_url):
-        return YTDLSource.create_source(
+        return await YTDLSource.create_source(
             ctx,
             track_url,
             loop=self.bot.loop
@@ -466,7 +469,7 @@ class Music(commands.Cog):
 
     async def __enqueue_single_track(self, ctx: commands.Context, track_url, enqueued_message: bool):
         try:
-            source = await __find_source()
+            source = await __find_source(ctx, track_url)
 
         except YTDLError as e:
             await ctx.send(
@@ -483,9 +486,9 @@ class Music(commands.Cog):
     async def __enqueue_bandcamp_album(self, ctx: commands.Context, bandcamp_album_url):
         sources = []
         for track_url in Bandcamp(bandcamp_album_url).perform():
-            sources.push(self.__find_source(ctx, track_url, False))
+            sources.append(self.__find_source(ctx, track_url))
 
-        sources = asyncio.gather(*sources)
+        sources = await asyncio.gather(*sources)
 
         for source in sources:
             song = Song(source)
