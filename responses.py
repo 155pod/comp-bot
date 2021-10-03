@@ -21,4 +21,4 @@ def get_enqueue_response():
 
 
 if __name__ == "__main__":
-    print get_enqueue_response()
+    print(get_enqueue_response())
