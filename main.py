@@ -299,7 +299,6 @@ class Music(commands.Cog):
         ctx.voice_state.voice = await destination.connect()
 
     @commands.command(name='summon', aliases=['connect'])
-    @commands.has_permissions(manage_guild=True)
     async def _summon(self, ctx: commands.Context, *, channel: discord.VoiceChannel = None):
         """Summons the bot to a voice channel.
 
@@ -317,7 +316,6 @@ class Music(commands.Cog):
         ctx.voice_state.voice = await destination.connect()
 
     @commands.command(name='leave', aliases=['disconnect'])
-    @commands.has_permissions(manage_guild=True)
     async def _leave(self, ctx: commands.Context):
         """Clears the queue and leaves the voice channel."""
 
@@ -326,7 +324,7 @@ class Music(commands.Cog):
 
         await ctx.voice_state.stop()
         del self.voice_states[ctx.guild.id]
-        return await ctx.send('bye!! \nFYI - this bot costs @aepergakis#0408 5 bones a month to maintain. \nit was built by @aepergakis#0408 & @bw#6156.\nyou might thank them if you have a minute')
+        return await ctx.send('bye!! \nFYI - this bot costs althea 5 bones a month to maintain. \nit was built by althea and bw with encouragement and support from smlbf.\nyou might thank them if you have a minute')
 
     @commands.command(name='volume')
     async def _volume(self, ctx: commands.Context, *, volume: int):
@@ -348,7 +346,6 @@ class Music(commands.Cog):
         await ctx.send(embed=ctx.voice_state.current.create_embed())
 
     @commands.command(name='pause')
-    @commands.has_permissions(manage_guild=True)
     async def _pause(self, ctx: commands.Context):
         """Pauses the currently playing song."""
 
@@ -357,7 +354,6 @@ class Music(commands.Cog):
             await ctx.message.add_reaction('⏯')
 
     @commands.command(name='resume')
-    @commands.has_permissions(manage_guild=True)
     async def _resume(self, ctx: commands.Context):
         """Resumes a currently paused song."""
 
@@ -366,7 +362,6 @@ class Music(commands.Cog):
             await ctx.message.add_reaction('⏯')
 
     @commands.command(name='stop')
-    @commands.has_permissions(manage_guild=True)
     async def _stop(self, ctx: commands.Context):
         """Stops playing song and clears the queue."""
 
@@ -414,6 +409,7 @@ class Music(commands.Cog):
             return await ctx.send('Empty queue.')
 
         items_per_page = 15
+        songcount = math.ceil(len(ctx.voice_state.songs))
         pages = math.ceil(len(ctx.voice_state.songs) / items_per_page)
 
         start = (page - 1) * items_per_page
@@ -424,7 +420,7 @@ class Music(commands.Cog):
             queue += '`{0}.` [**{1.source.title}**]({1.source.url})\n'.format(i + 1, song)
 
         embed = (discord.Embed(description='**{} tracks:**\n\n{}'.format(len(ctx.voice_state.songs), queue))
-                 .set_footer(text='Viewing page {}/{}'.format(page, pages)))
+                 .set_footer(text='Viewing page {}/{}. {} total songs queued'.format(page, pages, songcount)))
         await ctx.send(embed=embed)
 
     @commands.command(name='remove')
