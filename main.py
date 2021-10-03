@@ -457,13 +457,16 @@ class Music(commands.Cog):
             else:
                 await self.__enqueue_single_track(ctx, search, True)
 
+    async def __find_source(self, ctx: commands.Context, track_url):
+        return YTDLSource.create_source(
+            ctx,
+            track_url,
+            loop=self.bot.loop
+        )
+
     async def __enqueue_single_track(self, ctx: commands.Context, track_url, enqueued_message: bool):
         try:
-            source = await YTDLSource.create_source(
-                ctx,
-                track_url,
-                loop=self.bot.loop
-            )
+            source = await __find_source()
 
         except YTDLError as e:
             await ctx.send(
@@ -478,10 +481,15 @@ class Music(commands.Cog):
                 await ctx.send('Enqueued {}'.format(str(source)))
 
     async def __enqueue_bandcamp_album(self, ctx: commands.Context, bandcamp_album_url):
+        sources = []
         for track_url in Bandcamp(bandcamp_album_url).perform():
-            await self.__enqueue_single_track(ctx, track_url, False)
+            sources.push(self.__find_source(ctx, track_url, False))
 
-      
+        sources = asyncio.gather(*sources)
+
+        for source in sources:
+            song = Song(source)
+            await ctx.voice_state.songs.put(song)
 
     @_join.before_invoke
     @_play.before_invoke
