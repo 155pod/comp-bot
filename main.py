@@ -221,6 +221,9 @@ class VoiceState:
         while True:
             self.next.clear()
 
+            if self.current is not None:
+                await self.current.source.channel.send(responses.get_song_response(self.bot, self.current.source))
+
             if not self.loop:
                 # Try to get the next song within 3 minutes.
                 # If no song will be added to the queue in time,
