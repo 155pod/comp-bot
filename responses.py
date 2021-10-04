@@ -6,7 +6,7 @@ def get_enqueue_response():
     return random.choice([
         "Siiick!",
         ":sweat_drops:",
-        ":lfg:",
+        ":LFG:",
         "LetsFuckingGallop!",
         "Let's Go!",
         "Sick.",
