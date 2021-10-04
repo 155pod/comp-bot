@@ -453,7 +453,7 @@ class Music(commands.Cog):
             if "bandcamp.com/album" in search:
                 await ctx.send("Hold up. Currently enqueuing album...")
                 await self.__enqueue_bandcamp_album(ctx, search)
-                await ctx.send("%s The album is enqueued now." % responses.get_enqueue_response())
+                await ctx.send("%s The album is enqueued now." % responses.get_enqueue_response(self.bot))
             else:
                 await self.__enqueue_single_track(ctx, search, True)
 
