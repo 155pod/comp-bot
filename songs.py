@@ -15,7 +15,7 @@ class Song:
         self.requester = source.requester
 
     def create_embed(self):
-        track_info = self.__nice_desc(self.source.title, self.source.url)
+        track_info = self.__nice_desc(self.source)
         embed = (discord.Embed(title='Now playing',
                                description=track_info.format(self),
                                color=discord.Color.blurple())
@@ -24,9 +24,9 @@ class Song:
 
         return embed
 
-    def __nice_desc(self, description_source, url):
-        description_elements = description_source.split(" - ")
-        separator_count = len(re.findall("\s\-\s", description_source))
+    def __nice_desc(self, source: YTDLSource):
+        description_elements = source.title.split(" - ")
+        separator_count = len(re.findall("\s\-\s", source.title))
 
         # If there's only one separator found, we can be confident that we can
         # format the artist and track title separately.
@@ -41,17 +41,17 @@ class Song:
         # of all the spiders. Catching things and eating their insides.
         else:
             artist = ""
-            title = description_source
+            title = source.title
 
         # If the track is from YouTube we can maybe strip out some of the
         # garbage like (Official Music Video) from the track name.
-        if "youtube.com" in url:
-            title = source.nice_track_title()
+        if "youtube.com" in source.url:
+            title = source.nice_track_title(title)
 
         if len(artist) > 0:
-            return f'{artist} - [{title}]({url})'
+            return f'{artist} - [{title}]({source.url})'
         else:
-            return f'**[{title}]({url})**'
+            return f'**[{title}]({source.url})**'
 
 class SongQueue(asyncio.Queue):
     def __getitem__(self, item):
