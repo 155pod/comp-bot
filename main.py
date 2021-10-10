@@ -248,28 +248,21 @@ class Music(commands.Cog):
             await ctx.send('You have already voted to skip this song.')
 
     @commands.command(name='queue')
-    async def _queue(self, ctx: commands.Context, *, page: int = 1):
-        """Shows the player's queue.
-
-        You can optionally specify the page to show. Each page contains 15 elements.
-        """
+    async def _queue(self, ctx: commands.Context, *):
+        """Shows the player's queue."""
 
         if len(ctx.voice_state.songs) == 0:
             return await ctx.send('Empty queue.')
 
-        items_per_page = 15
-        songcount = math.ceil(len(ctx.voice_state.songs))
-        pages = math.ceil(len(ctx.voice_state.songs) / items_per_page)
-
-        start = (page - 1) * items_per_page
-        end = start + items_per_page
-
         queue = ''
-        for i, song in enumerate(ctx.voice_state.songs[start:end], start=start):
-            queue += '`{0}.` [**{1.source.title}**]({1.source.url})\n'.format(i + 1, song)
+        for i, song in ctx.voice_state.songs:
+            queue += '`{0}.` [{str(1.source)}]({1.source.url})\n'.format(i + 1, song)
 
-        embed = (discord.Embed(description='**{} tracks:**\n\n{}'.format(len(ctx.voice_state.songs), queue))
-                 .set_footer(text='Viewing page {}/{}. {} total songs queued'.format(page, pages, songcount)))
+        embed = discord.Embed(
+            description='**{} tracks:**\n\n{}'
+            .format(len(ctx.voice_state.songs), queue)
+        )
+
         await ctx.send(embed=embed)
 
     @commands.command(name='remove')
