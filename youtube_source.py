@@ -1,5 +1,6 @@
 import asyncio
 import functools
+import re
 
 import discord
 import youtube_dl
