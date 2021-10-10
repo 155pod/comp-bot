@@ -15,14 +15,10 @@ class Song:
         self.requester = source.requester
 
     def create_embed(self):
-        embed = (discord.Embed(
-            title='Now playing',
-            description=self.__nice_desc(
-                self.source.title,
-                self.source.url
-            ).format(self),
-            color=discord.Color.blurple()
-        )
+        track_info = self.__nice_desc(self.source.title, self.source.url)
+        embed = (discord.Embed(title='Now playing',
+                               description=track_info.format(self),
+                               color=discord.Color.blurple())
         .add_field(name='Duration', value=self.source.duration)
         .set_thumbnail(url=self.source.thumbnail))
 
@@ -48,7 +44,7 @@ class Song:
             title = description_source
 
         if len(artist) > 0:
-            return f'**{artist}** - [{title}]({url})'
+            return f'{artist} - [{title}]({url})'
         else:
             return f'**[{title}]({url})**'
 
