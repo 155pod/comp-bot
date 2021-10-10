@@ -29,11 +29,8 @@ class Song:
         return embed
 
     def __nice_desc(self, description_source, url):
-        artist_track_separator_re = "\s\-\s"
         description_elements = description_source.split(" - ")
-        separator_count = len(
-            re.findall(artist_track_separator, description_source)
-        )
+        separator_count = len(re.findall("\s\-\s", description_source))
 
         # If there's only one separator found, we can be confident that we can
         # format the artist and track title separately.
