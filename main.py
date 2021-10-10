@@ -319,7 +319,7 @@ class Music(commands.Cog):
             song = Song(source)
             await ctx.voice_state.songs.put(song)
 
-            if enqueued_message:
+            if len(ctx.voice_state.songs) > 1 and enqueued_message:
                 await ctx.send(f'Enqueued {str(source)}' \
                                f' {responses.get_enqueue_response(self.bot)}')
 
