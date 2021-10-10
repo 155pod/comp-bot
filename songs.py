@@ -46,19 +46,12 @@ class Song:
         # If the track is from YouTube we can maybe strip out some of the
         # garbage like (Official Music Video) from the track name.
         if "youtube.com" in url:
-            title = self.__without_youtube_garbage(title)
+            title = source.nice_track_title()
 
         if len(artist) > 0:
             return f'{artist} - [{title}]({url})'
         else:
             return f'**[{title}]({url})**'
-
-    def __without_youtube_garbage(self, track_title):
-        track_title = re.sub(r'\([O|o]fficial[\s\w]+\)', '', track_title)
-        track_title = re.sub(r'\([F|f]ull[\s\w]+]\)', '', track_title)
-        track_title = track_title.strip()
-
-        return track_title
 
 class SongQueue(asyncio.Queue):
     def __getitem__(self, item):
