@@ -55,7 +55,7 @@ class Song:
 
     def __without_youtube_garbage(self, track_title):
         track_title = re.sub(r'\([O|o]fficial[\s\w]+\)', '', track_title)
-        track_title = re.sub(r'\([F|f]ull[\s\w]+])', '', track_title)
+        track_title = re.sub(r'\([F|f]ull[\s\w]+]\)', '', track_title)
         track_title = track_title.strip()
 
         return track_title
