@@ -18,7 +18,6 @@ youtube_dl.utils.bug_reports_message = lambda: ''
 class VoiceError(Exception):
     pass
 
-
 class VoiceState:
     def __init__(self, bot: commands.Bot, ctx: commands.Context):
         self.bot = bot
@@ -298,7 +297,8 @@ class Music(commands.Cog):
             if "bandcamp.com/album" in search:
                 await ctx.send("Hold up. Currently enqueuing album...")
                 await self.__enqueue_bandcamp_album(ctx, search)
-                await ctx.send("%s The album is enqueued now." % responses.get_enqueue_response(self.bot))
+                await ctx.send(f'{responses.get_enqueue_response(self.bot)}' \
+                               f' The album is enqueued now.')
             else:
                 await self.__enqueue_single_track(ctx, search, True)
 
@@ -320,13 +320,12 @@ class Music(commands.Cog):
             await ctx.voice_state.songs.put(song)
 
             if enqueued_message:
-                await ctx.send('Enqueued {}'.format(str(source)))
+                await ctx.send(f'Enqueued {str(source)}' \
+                               f' {responses.get_enqueue_response(self.bot)}')
 
     async def __enqueue_bandcamp_album(self, ctx: commands.Context, bandcamp_album_url):
         for track_url in Bandcamp(bandcamp_album_url).perform():
             await self.__enqueue_single_track(ctx, track_url, False)
-
-
 
     @_join.before_invoke
     @_play.before_invoke
@@ -341,7 +340,6 @@ class Music(commands.Cog):
 
 bot = commands.Bot('music.', description='i am a bot that pulls a whole bandcamp album and queues it.')
 bot.add_cog(Music(bot))
-
 
 @bot.event
 async def on_ready():
