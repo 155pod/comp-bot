@@ -147,8 +147,6 @@ class Song:
                                description='```css\n{0.source.title}\n```'.format(self),
                                color=discord.Color.blurple())
                  .add_field(name='Duration', value=self.source.duration)
-                 .add_field(name='Requested by', value=self.requester.mention)
-                 .add_field(name='Uploader', value='[{0.source.uploader}]({0.source.uploader_url})'.format(self))
                  .add_field(name='URL', value='[Click]({0.source.url})'.format(self))
                  .set_thumbnail(url=self.source.thumbnail))
 
@@ -378,7 +376,7 @@ class Music(commands.Cog):
     @commands.command(name='skip')
     async def _skip(self, ctx: commands.Context):
         """Vote to skip a song. The requester can automatically skip.
-        3 skip votes are needed for the song to be skipped.
+        25% of listeners need to vote to skip.
         """
 
         if not ctx.voice_state.is_playing:
@@ -392,12 +390,13 @@ class Music(commands.Cog):
         elif voter.id not in ctx.voice_state.skip_votes:
             ctx.voice_state.skip_votes.add(voter.id)
             total_votes = len(ctx.voice_state.skip_votes)
+           # votes_needed = (len(ctx.author.voice.members.size))/4
 
-            if total_votes >= 3:
+            if total_votes >= 3: #votes_needed:
                 await ctx.message.add_reaction('⏭')
                 ctx.voice_state.skip()
             else:
-                await ctx.send('Skip vote added, currently at **{}/3**'.format(total_votes))
+                await ctx.send('Skip vote added, currently at **{}/{}**'.format(total_votes, votes_needed))
 
         else:
             await ctx.send('You have already voted to skip this song.')
