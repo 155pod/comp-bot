@@ -12,8 +12,6 @@ from songs import Song, SongQueue
 from youtube_source import YTDLError, YTDLSource
 import responses
 
-my_secret = os.environ['TOKEN']
-
 # Silence useless bug reports messages
 youtube_dl.utils.bug_reports_message = lambda: ''
 
@@ -327,7 +325,7 @@ class Music(commands.Cog):
         for track_url in Bandcamp(bandcamp_album_url).perform():
             await self.__enqueue_single_track(ctx, track_url, False)
 
-      
+
 
     @_join.before_invoke
     @_play.before_invoke
@@ -348,4 +346,4 @@ bot.add_cog(Music(bot))
 async def on_ready():
     print('Logged in as:\n{0.user.name}\n{0.user.id}'.format(bot))
 
-bot.run(my_secret)
+bot.run(os.environ['TOKEN'])
