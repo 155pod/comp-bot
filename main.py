@@ -256,10 +256,10 @@ class Music(commands.Cog):
 
         queue = ''
         for i, song in enumerate(ctx.voice_state.songs):
-            queue += f'**{i + 1}** [{str(song.source)}]({song.source.url})\n'
+            queue += f'1. [{str(song.source)}]({song.source.url})\n'
 
         embed = discord.Embed(
-            description='**{} tracks:**\n\n{}'
+            description="There's {} tracks in the queue:\n{}"
             .format(len(ctx.voice_state.songs), queue)
         )
 
