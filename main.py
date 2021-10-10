@@ -255,7 +255,7 @@ class Music(commands.Cog):
             return await ctx.send('Empty queue.')
 
         queue = ''
-        for i, song in ctx.voice_state.songs:
+        for i, song in enumerate(ctx.voice_state.songs):
             queue += '`{0}.` [{str(1.source)}]({1.source.url})\n'.format(i + 1, song)
 
         embed = discord.Embed(
