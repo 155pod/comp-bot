@@ -5,6 +5,8 @@ import youtube_dl
 
 from discord.ext import commands
 
+from songs import SongQueue
+
 import responses
 
 class VoiceError(Exception):
