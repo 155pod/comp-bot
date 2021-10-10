@@ -1,3 +1,5 @@
+import asyncio
+
 import discord
 import youtube_dl
 
