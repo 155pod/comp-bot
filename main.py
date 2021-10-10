@@ -168,7 +168,11 @@ class Music(commands.Cog):
 
         await ctx.voice_state.stop()
         del self.voice_states[ctx.guild.id]
-        return await ctx.send('bye!! \nFYI - this bot costs althea 5 bones a month to maintain. \nit was built by althea and bw with encouragement and support from smlbf.\nyou might thank them if you have a minute')
+        return await ctx.send(
+            """Bye!!
+            FYI – this bot costs althea 5 bones a month to maintain.
+            It was built by althea, bw, and smlbf. You might thank them if you have a minute."""
+        )
 
     @commands.command(name='volume')
     async def _volume(self, ctx: commands.Context, *, volume: int):
