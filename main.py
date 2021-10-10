@@ -323,6 +323,9 @@ class Music(commands.Cog):
                 await ctx.send(f'Enqueued {str(source)}' \
                                f' {responses.get_enqueue_response(self.bot)}')
 
+            if "Rollin" in source.title:
+                await ctx.send("Rollin', rollin', rollin', rollin'")
+
     async def __enqueue_bandcamp_album(self, ctx: commands.Context, bandcamp_album_url):
         for track_url in Bandcamp(bandcamp_album_url).perform():
             await self.__enqueue_single_track(ctx, track_url, False)
