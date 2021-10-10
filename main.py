@@ -248,7 +248,7 @@ class Music(commands.Cog):
             await ctx.send('You have already voted to skip this song.')
 
     @commands.command(name='queue')
-    async def _queue(self, ctx: commands.Context, *):
+    async def _queue(self, ctx: commands.Context):
         """Shows the player's queue."""
 
         if len(ctx.voice_state.songs) == 0:
