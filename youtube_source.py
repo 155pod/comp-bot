@@ -59,8 +59,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
     def __str__(self):
         return self.nice_track_title().format(self)
 
-    def nice_track_title(self):
-        track_title = self.title
+    def nice_track_title(self, track_title = self.title):
         track_title = re.sub(r'\([O|o]fficial[\s\w]+\)', '', track_title)
         track_title = re.sub(r'\([F|f]ull[\s\w]+]\)', '', track_title)
         track_title = track_title.strip()

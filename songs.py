@@ -46,7 +46,7 @@ class Song:
         # If the track is from YouTube we can maybe strip out some of the
         # garbage like (Official Music Video) from the track name.
         if "youtube.com" in source.url:
-            title = source.nice_track_title()
+            title = source.nice_track_title(title)
 
         if len(artist) > 0:
             return f'{artist} - [{title}]({source.url})'
