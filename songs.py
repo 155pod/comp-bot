@@ -49,7 +49,7 @@ class Song:
             title = self.__without_youtube_garbage(title)
 
         if len(artist) > 0:
-            return f'{artist} - [{self.title}]({url})'
+            return f'{artist} - [{title}]({url})'
         else:
             return f'**[{title}]({url})**'
 
