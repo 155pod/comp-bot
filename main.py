@@ -298,7 +298,7 @@ class Music(commands.Cog):
                 await ctx.send("Hold up. Currently enqueuing album...")
                 await self.__enqueue_bandcamp_album(ctx, search)
                 await ctx.send(f'{responses.get_enqueue_response(self.bot)}' \
-                               f'The album is enqueued now.')
+                               f' The album is enqueued now.')
             else:
                 await self.__enqueue_single_track(ctx, search, True)
 
@@ -320,8 +320,8 @@ class Music(commands.Cog):
             await ctx.voice_state.songs.put(song)
 
             if enqueued_message:
-                await ctx.send(f'_Enqueued {str(source)}_ ' \
-                               f'{responses.get_enqueue_response(self.bot)}')
+                await ctx.send(f'Enqueued {str(source)}' \
+                               f' {responses.get_enqueue_response(self.bot)}')
 
     async def __enqueue_bandcamp_album(self, ctx: commands.Context, bandcamp_album_url):
         for track_url in Bandcamp(bandcamp_album_url).perform():
