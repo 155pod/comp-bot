@@ -146,33 +146,34 @@ class Music(commands.Cog):
             f'Hello, I am **comp-bot**.\n'                                    \
             f'My favourite band is {random.choice(favourite_bands)}. '        \
             f'The best 155 host is {random.choice(favourite_hosts)}.\n'       \
-            f'Here\'s a list of my commands:\n\n'                             \
-            f'`help`\n'                                                       \
+            f'Here\'s a list of my commands:\n'                               \
+            f'>>> '                                                           \
+            f'`help`: '                                                       \
             f'Congratulations, you figured this one out.\n'                   \
-            f'`join`\n'                                                       \
+            f'`join`: '                                                       \
             f'Join a voice channel.\n'                                        \
-            f'`now`\n'                                                        \
-            f'Display what\'s playing right now.\n'                           \
+            f'`now`: '                                                        \
+            f'Display what\'s playing right now. '                            \
             f'(aliases: `current`, `np`, `playing`)\n'                        \
-            f'`pause`\n'                                                      \
+            f'`pause`: '                                                      \
             f'Pause the currently playing track.\n'                           \
-            f'`play`\n'                                                       \
+            f'`play`: '                                                       \
             f'Add a song to the play queue. This takes a URL or YouTube '     \
-            f'search term.\n'                                                 \
+            f'search term. '                                                  \
             f'(aliases: `add`)\n'                                             \
-            f'`queue`\n'                                                      \
+            f'`queue`: '                                                      \
             f'Show a list of currently queued songs.\n'                       \
-            f'`remove`\n'                                                     \
+            f'`remove`: '                                                     \
             f'Remove a queued song. (E.g. `remove 2`.)\n'                     \
-            f'`resume`\n'                                                     \
+            f'`resume`: '                                                     \
             f'Resume a song that\'s been paused.\n'                           \
-            f'`skip`\n'                                                       \
+            f'`skip`: '                                                       \
             f'Skip the current song, democratically.\n'                       \
-            f'`stop`\n'                                                       \
+            f'`stop`: '                                                       \
             f'Stop the current song and clear the queue.\n'                   \
-            f'`summon`\n'                                                     \
+            f'`summon`: '                                                     \
             f'Invite me to join the current voice channel.\n'                 \
-            f'`volume`\n'                                                     \
+            f'`volume`: '                                                     \
             f'Set the player volume (for everyone).\n'
             .format(self)
         )
