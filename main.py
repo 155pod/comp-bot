@@ -133,31 +133,47 @@ class Music(commands.Cog):
 
     @commands.command(name='help', invoke_without_subcommand=True)
     async def help(self, ctx: commands.Context):
+        favourite_bands = [
+            "blink-182",
+            "+44",
+            "Angels & Airwaves",
+            "Box Car Racer",
+            "The Tragically Hip (with a capital T in the 'The')"
+        ]
+        favourite_hosts = ["Sam", "Josiah"]
+
         await ctx.send(
             f'Hello, I am **comp-bot**.\n'                                    \
-            f'My favourite band is blink-182 and my favourite pharmacy is '   \
-            f'Shoppers Drug Mart. The best 155 host is '                      \
-            f'{random.choice(["Sam","Josiah"])}\n'                            \
-            f'Here\'s a list of my commands:\n'                               \
-            f'|-------------|---------------------------------------------|\n'\
-            f'| Command     | Description                                 |\n'\
-            f'|-------------|---------------------------------------------|\n'\
-            f'| `help`      | Congratulations, you figured this one out.  |\n'\
-            f'| `join`      | Join a voice channel.                       |\n'\
-            f'| `now`       | Display what\'s playing right now.          |\n'\
-            f'|             | (aliases: `current`, `np`, `playing`)       |\n'\
-            f'| `pause`     | Pause the currently playing track.          |\n'\
-            f'| `play`      | Add a song to the play queue. This takes a  |\n'\
-            f'|             | URL or YouTube search term.                 |\n'\
-            f'|             | (aliases: `add`)                            |\n'\
-            f'| `queue`     | Show a list of currently queued songs.      |\n'\
-            f'| `remove`    | Remove a queued song. (E.g. `remove 2`.)    |\n'\
-            f'| `resume`    | Resume a song that\'s been paused.          |\n'\
-            f'| `skip`      | Skip the current song, democratically.      |\n'\
-            f'| `stop`      | Stop the current song and clear the queue.  |\n'\
-            f'| `summon`    | Invite me to join the current voice channel.|\n'\
-            f'| `volume`    | Set the player volume (for everyone).       |\n'\
-            f'|-------------|---------------------------------------------|\n'
+            f'My favourite band is {random.choice(favourite_bands)}. '        \
+            f'The best 155 host is {random.choice(favourite_hosts)}.\n'       \
+            f'Here\'s a list of my commands:\n\n'                             \
+            f'`help`\n'                                                       \
+            f'Congratulations, you figured this one out.\n'                   \
+            f'`join`\n'                                                       \
+            f'Join a voice channel.\n'                                        \
+            f'`now`\n'                                                        \
+            f'Display what\'s playing right now.\n'                           \
+            f'(aliases: `current`, `np`, `playing`)\n'                        \
+            f'`pause`\n'                                                      \
+            f'Pause the currently playing track.\n'                           \
+            f'`play`\n'                                                       \
+            f'Add a song to the play queue. This takes a URL or YouTube '     \
+            f'search term.\n'                                                 \
+            f'(aliases: `add`)\n'                                             \
+            f'`queue`\n'                                                      \
+            f'Show a list of currently queued songs.\n'                       \
+            f'`remove`\n'                                                     \
+            f'Remove a queued song. (E.g. `remove 2`.)\n'                     \
+            f'`resume`\n'                                                     \
+            f'Resume a song that\'s been paused.\n'                           \
+            f'`skip`\n'                                                       \
+            f'Skip the current song, democratically.\n'                       \
+            f'`stop`\n'                                                       \
+            f'Stop the current song and clear the queue.\n'                   \
+            f'`summon`\n'                                                     \
+            f'Invite me to join the current voice channel.\n'                 \
+            f'`volume`\n'                                                     \
+            f'Set the player volume (for everyone).\n'
             .format(self)
         )
 
