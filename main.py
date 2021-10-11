@@ -1,6 +1,7 @@
 import asyncio
 import math
 import os
+import random
 
 import discord
 import youtube_dl
@@ -101,7 +102,6 @@ class VoiceState:
             await self.voice.disconnect()
             self.voice = None
 
-
 class Music(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -130,6 +130,53 @@ class Music(commands.Cog):
 
     async def cog_command_error(self, ctx: commands.Context, error: commands.CommandError):
         await ctx.send('An error occurred: {}'.format(str(error)))
+
+    @commands.command(name='help', invoke_without_subcommand=True)
+    async def help(self, ctx: commands.Context):
+        favourite_bands = [
+            "blink-182",
+            "+44",
+            "Angels & Airwaves",
+            "Box Car Racer",
+            "The Tragically Hip (with a capital T in the 'The')"
+        ]
+        favourite_hosts = ["Sam", "Josiah"]
+
+        await ctx.send(
+            f'Hello, I am **comp-bot**.\n'                                    \
+            f'My favourite band is {random.choice(favourite_bands)}. '        \
+            f'The best 155 host is {random.choice(favourite_hosts)}.\n'       \
+            f'Here\'s a list of my commands:\n'                               \
+            f'>>> '                                                           \
+            f'`help`: '                                                       \
+            f'Congratulations, you figured this one out.\n'                   \
+            f'`join`: '                                                       \
+            f'Join a voice channel.\n'                                        \
+            f'`now`: '                                                        \
+            f'Display what\'s playing right now. '                            \
+            f'(aliases: `current`, `np`, `playing`)\n'                        \
+            f'`pause`: '                                                      \
+            f'Pause the currently playing track.\n'                           \
+            f'`play`: '                                                       \
+            f'Add a song to the play queue. This takes a URL or YouTube '     \
+            f'search term. '                                                  \
+            f'(aliases: `add`)\n'                                             \
+            f'`queue`: '                                                      \
+            f'Show a list of currently queued songs.\n'                       \
+            f'`remove`: '                                                     \
+            f'Remove a queued song. (E.g. `remove 2`.)\n'                     \
+            f'`resume`: '                                                     \
+            f'Resume a song that\'s been paused.\n'                           \
+            f'`skip`: '                                                       \
+            f'Skip the current song, democratically.\n'                       \
+            f'`stop`: '                                                       \
+            f'Stop the current song and clear the queue.\n'                   \
+            f'`summon`: '                                                     \
+            f'Invite me to join the current voice channel.\n'                 \
+            f'`volume`: '                                                     \
+            f'Set the player volume (for everyone).\n'
+            .format(self)
+        )
 
     @commands.command(name='join', invoke_without_subcommand=True)
     async def _join(self, ctx: commands.Context):
@@ -274,7 +321,7 @@ class Music(commands.Cog):
         ctx.voice_state.songs.remove(index - 1)
         await ctx.message.add_reaction('✅')
 
-    @commands.command(name='play')
+    @commands.command(name='play', aliases=['add'])
     async def _play(self, ctx: commands.Context, *, search: str):
         """Plays a song.
 
@@ -337,7 +384,12 @@ class Music(commands.Cog):
                 raise commands.CommandError('Bot is already in a voice channel.')
 
 
-bot = commands.Bot('music.', description='i am a bot that pulls a whole bandcamp album and queues it.')
+bot = commands.Bot(
+    'music.',
+    description='I am made of Sam and Jos and I play full Bandcamp albums.',
+    help_command=None
+)
+
 bot.add_cog(Music(bot))
 
 @bot.event

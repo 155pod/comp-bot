@@ -33,7 +33,7 @@ def get_song_response(bot: commands.Bot, source):
 
     sclusie_responses = {
         "shoes" : [
-            "Can you believe a SHOE made that?!"    
+            "Can you believe a SHOE made that?!"
         ],
         "laundromat" : [
             "Come on man, I'm just trying to wash my shorts!"
