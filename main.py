@@ -8,7 +8,7 @@ from async_timeout import timeout
 from discord.ext import commands
 
 from bandcamp import Bandcamp
-from songs import Song
+from songs import Song, SongQueue
 from voice import VoiceError, VoiceState
 from youtube_source import YTDLError, YTDLSource
 
