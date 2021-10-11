@@ -134,10 +134,10 @@ class Music(commands.Cog):
     @commands.command(name='help', invoke_without_subcommand=True)
     async def help(self, ctx: commands.Context):
         await ctx.send(
-            f'{responses.emoji(":sweat_drops:")} Hello, I am **comp-bot**. '  \
-            f'{responses.emoji(":sweat_drops")}\nMy favourite band is '       \
-            f'blink-182 and my favourite pharmacy is Shoppers Drug Mart. The '\
-            f'best 155 host is {sample(["Sam","Josiah"])}\n'                  \
+            f'Hello, I am **comp-bot**.\n'                                    \
+            f'My favourite band is blink-182 and my favourite pharmacy is '   \
+            f'Shoppers Drug Mart. The best 155 host is '                      \
+            f'{sample(["Sam","Josiah"])}\n'                                   \
             f'Here\'s a list of my commands:\n'                               \
             f'|-------------|---------------------------------------------|\n'\
             f'| Command     | Description                                 |\n'\

@@ -4,12 +4,12 @@ from discord.ext import commands
 
 random.seed()
 
-def emoji(emoji_name):
-    if bot is None:
-        return emoji_name
-    return str(discord.utils.get(bot.emojis, name=emoji_name))
-
 def get_enqueue_response(bot: commands.Bot):
+
+    def emoji(emoji_name):
+        if bot is None:
+            return emoji_name
+        return str(discord.utils.get(bot.emojis, name=emoji_name))
 
     return random.choice([
         "Siiick!",
