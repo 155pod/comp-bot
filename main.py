@@ -131,6 +131,12 @@ class Music(commands.Cog):
     async def cog_command_error(self, ctx: commands.Context, error: commands.CommandError):
         await ctx.send('An error occurred: {}'.format(str(error)))
 
+    @commands.command(name='help', invoke_without_subcommand=True)
+    async def help(context):
+        await context.send("""
+Hello, I'm a custom help command.
+"""
+
     @commands.command(name='join', invoke_without_subcommand=True)
     async def _join(self, ctx: commands.Context):
         """Joins a voice channel."""
@@ -274,7 +280,7 @@ class Music(commands.Cog):
         ctx.voice_state.songs.remove(index - 1)
         await ctx.message.add_reaction('✅')
 
-    @commands.command(name='play')
+    @commands.command(name='play', aliases=['add'])
     async def _play(self, ctx: commands.Context, *, search: str):
         """Plays a song.
 
@@ -337,7 +343,12 @@ class Music(commands.Cog):
                 raise commands.CommandError('Bot is already in a voice channel.')
 
 
-bot = commands.Bot('music.', description='i am a bot that pulls a whole bandcamp album and queues it.')
+bot = commands.Bot(
+    'music.',
+    description='I am made of Sam and Jos and I play full Bandcamp albums.',
+    help_command=None
+)
+
 bot.add_cog(Music(bot))
 
 @bot.event
