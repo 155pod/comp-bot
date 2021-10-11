@@ -132,8 +132,8 @@ class Music(commands.Cog):
         await ctx.send('An error occurred: {}'.format(str(error)))
 
     @commands.command(name='help', invoke_without_subcommand=True)
-    async def help(context):
-        await context.send("""
+    async def help(self, ctx: commands.Context):
+        await ctx.send("""
 Hello, I'm a custom help command.
 """)
 
