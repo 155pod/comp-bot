@@ -137,7 +137,7 @@ class Music(commands.Cog):
             f'Hello, I am **comp-bot**.\n'                                    \
             f'My favourite band is blink-182 and my favourite pharmacy is '   \
             f'Shoppers Drug Mart. The best 155 host is '                      \
-            f'{sample(["Sam","Josiah"])}\n'                                   \
+            f'{random.choice(["Sam","Josiah"])}\n'                            \
             f'Here\'s a list of my commands:\n'                               \
             f'|-------------|---------------------------------------------|\n'\
             f'| Command     | Description                                 |\n'\
