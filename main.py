@@ -135,7 +135,7 @@ class Music(commands.Cog):
     async def help(context):
         await context.send("""
 Hello, I'm a custom help command.
-"""
+""")
 
     @commands.command(name='join', invoke_without_subcommand=True)
     async def _join(self, ctx: commands.Context):
