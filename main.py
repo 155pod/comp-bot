@@ -134,30 +134,30 @@ class Music(commands.Cog):
     @commands.command(name='help', invoke_without_subcommand=True)
     async def help(self, ctx: commands.Context):
         await ctx.send(
-            r'{responses.emoji(:sweat_drops:)} Hello, I am **comp-bot**. '    \
-            r'{responses.emoji(:sweat_drops)}\nMy favourite band is blink-182'\
-            r'and my favourite pharmacy is Shoppers Drug Mart. The best 155 ' \
-            r'host is {sample(["Sam","Josiah"])}\nHere\'s a list of my '      \
-            r'commands:\n' \
-            r'|-------------|---------------------------------------------|\n'\
-            r'| Command     | Description                                 |\n'\
-            r'|-------------|---------------------------------------------|\n'\
-            r'| `help`      | Congratulations, you figured this one out.  |\n'\
-            r'| `join`      | Join a voice channel.                       |\n'\
-            r'| `now`       | Display what\'s playing right now.          |\n'\
-            r'|             | (aliases: `current`, `np`, `playing`)       |\n'\
-            r'| `pause`     | Pause the currently playing track.          |\n'\
-            r'| `play`      | Add a song to the play queue. This takes a  |\n'\
-            r'|             | URL or YouTube search term.                 |\n'\
-            r'|             | (aliases: `add`)                            |\n'\
-            r'| `queue`     | Show a list of currently queued songs.      |\n'\
-            r'| `remove`    | Remove a queued song. (E.g. `remove 2`.)    |\n'\
-            r'| `resume`    | Resume a song that\'s been paused.          |\n'\
-            r'| `skip`      | Skip the current song, democratically.      |\n'\
-            r'| `stop`      | Stop the current song and clear the queue.  |\n'\
-            r'| `summon`    | Invite me to join the current voice channel.|\n'\
-            r'| `volume`    | Set the player volume (for everyone).       |\n'\
-            r'|-------------|---------------------------------------------|\n'
+            f'{responses.emoji(:sweat_drops:)} Hello, I am **comp-bot**. '    \
+            f'{responses.emoji(:sweat_drops)}\nMy favourite band is blink-182'\
+            f'and my favourite pharmacy is Shoppers Drug Mart. The best 155 ' \
+            f'host is {sample(["Sam","Josiah"])}\nHere\'s a list of my '      \
+            f'commands:\n' \
+            f'|-------------|---------------------------------------------|\n'\
+            f'| Command     | Description                                 |\n'\
+            f'|-------------|---------------------------------------------|\n'\
+            f'| `help`      | Congratulations, you figured this one out.  |\n'\
+            f'| `join`      | Join a voice channel.                       |\n'\
+            f'| `now`       | Display what\'s playing right now.          |\n'\
+            f'|             | (aliases: `current`, `np`, `playing`)       |\n'\
+            f'| `pause`     | Pause the currently playing track.          |\n'\
+            f'| `play`      | Add a song to the play queue. This takes a  |\n'\
+            f'|             | URL or YouTube search term.                 |\n'\
+            f'|             | (aliases: `add`)                            |\n'\
+            f'| `queue`     | Show a list of currently queued songs.      |\n'\
+            f'| `remove`    | Remove a queued song. (E.g. `remove 2`.)    |\n'\
+            f'| `resume`    | Resume a song that\'s been paused.          |\n'\
+            f'| `skip`      | Skip the current song, democratically.      |\n'\
+            f'| `stop`      | Stop the current song and clear the queue.  |\n'\
+            f'| `summon`    | Invite me to join the current voice channel.|\n'\
+            f'| `volume`    | Set the player volume (for everyone).       |\n'\
+            f'|-------------|---------------------------------------------|\n'
             .format(self)
         )
 
