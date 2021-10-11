@@ -4,12 +4,12 @@ from discord.ext import commands
 
 random.seed()
 
-def get_enqueue_response(bot: commands.Bot):
+def emoji(emoji_name):
+    if bot is None:
+        return emoji_name
+    return str(discord.utils.get(bot.emojis, name=emoji_name))
 
-    def emoji(emoji_name):
-        if bot is None:
-            return emoji_name
-        return str(discord.utils.get(bot.emojis, name=emoji_name))
+def get_enqueue_response(bot: commands.Bot):
 
     return random.choice([
         "Siiick!",
@@ -33,7 +33,7 @@ def get_song_response(bot: commands.Bot, source):
 
     sclusie_responses = {
         "shoes" : [
-            "Can you believe a SHOE made that?!"    
+            "Can you believe a SHOE made that?!"
         ],
         "laundromat" : [
             "Come on man, I'm just trying to wash my shorts!"
