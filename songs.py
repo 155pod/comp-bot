@@ -15,7 +15,7 @@ class Song:
         self.requester = source.requester
 
     def create_embed(self):
-        track_info = self.__nice_desc(self.source)
+        track_info = self.nice_desc(self.source)
         embed = (discord.Embed(title='Now playing',
                                description=track_info.format(self),
                                color=discord.Color.blurple())
@@ -24,7 +24,7 @@ class Song:
 
         return embed
 
-    def __nice_desc(self, source: YTDLSource):
+    def nice_desc(self, source: YTDLSource):
         description_elements = source.title.split(" - ")
         separator_count = len(re.findall("\s\-\s", source.title))
 
@@ -35,8 +35,9 @@ class Song:
         # If there's more than one separator found, we can naively split on
         # the first separator and hope that's the right one to split on...
         elif separator_count > 1:
-            artist = description_elements[:1]
-            title = " - ".join(description_elements[1:])
+            elements = list(dict.fromkeys(description_elements))
+            artist = "".join(elements[:1])
+            title = " - ".join(elements[1:])
         # In other cases there's no clear way to do anything cool. I'm scared
         # of all the spiders. Catching things and eating their insides.
         else:
