@@ -341,7 +341,7 @@ class Music(commands.Cog):
                 track_urls = Bandcamp(search).perform()
                 if len(track_urls) > 1:
                     await ctx.send("Hold up. Currently enqueuing album...")
-                    await self.__enqueue_bandcamp_album(ctx, search)
+                    await self.__enqueue_bandcamp_album(ctx, track_urls)
                     await ctx.send(f'{responses.get_enqueue_response(self.bot)}' \
                                    f' The album is enqueued now.')
                 else:
