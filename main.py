@@ -337,11 +337,15 @@ class Music(commands.Cog):
             await ctx.invoke(self._join)
 
         async with ctx.typing():
-            if "bandcamp.com/album" in search:
-                await ctx.send("Hold up. Currently enqueuing album...")
-                await self.__enqueue_bandcamp_album(ctx, search)
-                await ctx.send(f'{responses.get_enqueue_response(self.bot)}' \
-                               f' The album is enqueued now.')
+            if "bandcamp.com" in search:
+                track_urls = Bandcamp(search).perform()
+                if len(track_urls) > 1:
+                    await ctx.send("Hold up. Currently enqueuing album...")
+                    await self.__enqueue_bandcamp_album(ctx, search)
+                    await ctx.send(f'{responses.get_enqueue_response(self.bot)}' \
+                                   f' The album is enqueued now.')
+                else:
+                    await self.__enqueue_single_track(ctx, search, True)
             else:
                 await self.__enqueue_single_track(ctx, search, True)
 
@@ -369,8 +373,8 @@ class Music(commands.Cog):
             if "Rollin" in source.title:
                 await ctx.send("Rollin', rollin', rollin', rollin'")
 
-    async def __enqueue_bandcamp_album(self, ctx: commands.Context, bandcamp_album_url):
-        for track_url in Bandcamp(bandcamp_album_url).perform():
+    async def __enqueue_bandcamp_album(self, ctx: commands.Context, album_track_urls):
+        for track_url in album_track_urls:
             await self.__enqueue_single_track(ctx, track_url, False)
 
     @_join.before_invoke
