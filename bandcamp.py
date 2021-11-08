@@ -18,20 +18,20 @@ class Bandcamp:
         if not self.__is_bandcamp_link():
             return []
 
+        # If the link is a Bandcamp track link, return the single track link as
+        # a list.
+        if self.__is_track_link():
+            return self.url.split()
+
         # If the link is a Bandcamp album link, return a list of links to each
         # individual track. If there are no track links, return an empty array.
-        if self.__is_album_link():
+        elif self.__is_album_link():
             album_links = self.__album_track_links(self.url)
 
             if len(album_links) == 0:
                 return []
             else:
                 return album_links
-
-        # If the link is a Bandcamp track link, return the single track link as
-        # a list.
-        elif self.__is_track_link():
-            return self.url.split()
 
         # Otherwise, return an empty array.
         else:
@@ -60,7 +60,10 @@ class Bandcamp:
         if "/album/" in self.url:
             return True
         else:
-            return False
+            if len(self.__album_track_links(self.url)) > 0:
+                return True
+            else:
+                return False
 
     def __is_track_link(self):
         if "/track/" in self.url:
